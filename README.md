@@ -1,2 +1,3 @@
 # GraphQL_Study
-graphql study using apollo framework
+
+graphql study using TypeGraphQL framework
