@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "lib": ["es2016", "esnext.asynciterable"],
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./build",
+    "removeComments": false,
+    "importHelpers": true,
+
+    "strict": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["./examples", "./src", "./tests"],
+  "exclude": ["./examples/apollo-client"]
+}
