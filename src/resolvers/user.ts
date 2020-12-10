@@ -35,7 +35,7 @@ export class RegisterResolver {
       lastName,
       email,
       password: hashedPassword,
-    });
+    }).save();
     return user;
   }
 }
