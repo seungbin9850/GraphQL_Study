@@ -5,11 +5,15 @@ import {
   Arg,
   FieldResolver,
   Root,
+  Ctx,
+  UseMiddleware,
 } from "type-graphql";
 import * as bcrypt from "bcryptjs";
 import { User } from "../entity/user";
 import { LoginRequest, LoginResponse } from "../dto/user";
 import { generateAccessToken } from "../utils/jwt";
+import { Context } from "../dto/context";
+import { isAuth } from "../middleware/auth";
 
 @Resolver(User)
 export class RegisterResolver {
@@ -19,8 +23,9 @@ export class RegisterResolver {
   }
 
   @Query(() => User)
-  async getUser(@Arg("id") id: number): Promise<User> {
-    const user: any = await User.findOne({ where: { id } });
+  @UseMiddleware(isAuth)
+  async getUser(@Ctx() { payload }: Context): Promise<User> {
+    const user: any = await User.findOne({ where: { id: payload!.id } });
     return user;
   }
 
