@@ -10,7 +10,10 @@ const main = async () => {
   const schema = await buildSchema({
     resolvers: [RegisterResolver],
   });
-  const apolloServer = new ApolloServer({ schema });
+  const apolloServer = new ApolloServer({
+    schema,
+    context: ({ req, res }) => ({ req, res }),
+  });
   const app = Express();
   apolloServer.applyMiddleware({ app });
   app.listen(3000, () => {
