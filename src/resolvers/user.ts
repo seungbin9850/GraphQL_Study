@@ -16,6 +16,12 @@ export class RegisterResolver {
     return "hello world";
   }
 
+  @Query(() => User)
+  async getUser(@Arg("id") id: number): Promise<User> {
+    const user: any = await User.findOne({ where: { id } });
+    return user;
+  }
+
   @FieldResolver()
   async name(@Root() parent: User) {
     return `${parent.firstName} ${parent.lastName}`;
