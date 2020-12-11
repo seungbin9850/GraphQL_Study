@@ -8,6 +8,8 @@ import {
 } from "type-graphql";
 import * as bcrypt from "bcryptjs";
 import { User } from "../entity/user";
+import { LoginRequest, LoginResponse } from "../dto/user";
+import { generateAccessToken } from "../utils/jwt";
 
 @Resolver(User)
 export class RegisterResolver {
@@ -42,5 +44,15 @@ export class RegisterResolver {
       password: hashedPassword,
     }).save();
     return user;
+  }
+
+  @Mutation(() => LoginResponse)
+  async login(@Arg("data") data: LoginRequest): Promise<LoginResponse> {
+    const { email, password } = data;
+    const user = await User.findOne({ where: { email } });
+    if (!user) throw new Error("User not exists");
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) throw new Error("Password not mached");
+    return { accessToken: await generateAccessToken(user.id) };
   }
 }
