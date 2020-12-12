@@ -17,7 +17,7 @@ import { isAuth } from "../middleware/auth";
 
 @Resolver(User)
 export class RegisterResolver {
-  @Query(() => String, { name: "helloWorld" })
+  @Query(() => String, { name: "helloWorld", nullable: false })
   async hello() {
     return "hello world";
   }
