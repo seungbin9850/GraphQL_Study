@@ -11,7 +11,7 @@ import {
 import * as bcrypt from "bcryptjs";
 import { User } from "../entity/user";
 import { LoginRequest, LoginResponse } from "../dto/user";
-import { generateAccessToken } from "../utils/jwt";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 import { Context } from "../dto/context";
 import { isAuth } from "../middleware/auth";
 
@@ -52,12 +52,18 @@ export class RegisterResolver {
   }
 
   @Mutation(() => LoginResponse)
-  async login(@Arg("data") data: LoginRequest): Promise<LoginResponse> {
+  async login(
+    @Arg("data") data: LoginRequest,
+    @Ctx() { res }: Context
+  ): Promise<LoginResponse> {
     const { email, password } = data;
     const user = await User.findOne({ where: { email } });
     if (!user) throw new Error("User not exists");
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) throw new Error("Password not mached");
+    res.cookie("jid", generateRefreshToken(user.id, user.tokenVersion), {
+      httpOnly: true,
+    });
     return { accessToken: await generateAccessToken(user.id) };
   }
 }
