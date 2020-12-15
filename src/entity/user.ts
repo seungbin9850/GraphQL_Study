@@ -6,11 +6,11 @@ import {
   OneToMany,
 } from "typeorm";
 import { Field, ID, ObjectType } from "type-graphql";
-import { Post } from "./post";
+import Post from "./post";
 
 @ObjectType()
 @Entity()
-export class User extends BaseEntity {
+export default class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
