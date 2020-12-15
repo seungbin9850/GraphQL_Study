@@ -1,5 +1,5 @@
 import { InputType, Field } from "type-graphql";
-import { Post } from "../entity/post";
+import { Post } from "../entity";
 
 @InputType()
 export class PostRequest implements Partial<Post> {
