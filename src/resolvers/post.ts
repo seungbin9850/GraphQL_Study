@@ -4,7 +4,7 @@ import { Post } from "../entity/post";
 import { PostRequest, UpdatePostRequest } from "../dto/post";
 
 @Resolver()
-export class PostResolver {
+export default class PostResolver {
   @Query(() => [Post])
   async getPosts() {
     return await Post.find({ relations: ["user", "user.posts"] });
