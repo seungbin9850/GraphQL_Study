@@ -3,7 +3,8 @@ import * as Express from "express";
 import { buildSchema } from "type-graphql";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { RegisterResolver } from "./resolvers/user";
+import { UserResolver } from "./resolvers/user";
+import { PostResolver } from "./resolvers/post";
 import * as cors from "cors";
 import * as cookieParser from "cookie-parser";
 import { refreshToken } from "./controller/refresh";
@@ -11,7 +12,7 @@ import { refreshToken } from "./controller/refresh";
 const main = async () => {
   await createConnection();
   const schema = await buildSchema({
-    resolvers: [RegisterResolver],
+    resolvers: [UserResolver, PostResolver],
   });
   const apolloServer = new ApolloServer({
     schema,
