@@ -9,10 +9,10 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import { User } from "./user";
+import User from "./user";
 
 @Entity()
-export class Post extends BaseEntity {
+export default class Post extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
