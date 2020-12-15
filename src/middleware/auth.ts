@@ -8,6 +8,9 @@ export const isAuth: MiddlewareFn<Context> = async ({ context }, next) => {
   try {
     const token = authorization.split(" ")[1];
     const payload = await verifyAccessToken(token);
-    context["payload"] = payload as any;
-  } catch (e) {}
+    context.payload = payload as any;
+  } catch (e) {
+    throw new Error("not authenticated");
+  }
+  return next();
 };
