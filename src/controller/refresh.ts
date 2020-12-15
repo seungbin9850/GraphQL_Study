@@ -4,7 +4,7 @@ import {
   generateRefreshToken,
   verifyRefreshToken,
 } from "../utils/jwt";
-import { User } from "../entity/user";
+import { User } from "../entity";
 
 export const refreshToken = async (req: Request, res: Response) => {
   const token = req.cookies.jid;
