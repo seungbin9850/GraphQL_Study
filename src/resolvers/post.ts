@@ -1,6 +1,5 @@
 import { Query, Resolver, Mutation, Arg } from "type-graphql";
-import { User } from "../entity/user";
-import { Post } from "../entity/post";
+import { User, Post } from "../entity";
 import { PostRequest, UpdatePostRequest } from "../dto/post";
 
 @Resolver()
