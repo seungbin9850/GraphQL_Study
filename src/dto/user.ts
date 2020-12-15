@@ -1,6 +1,6 @@
 import { InputType, Field, ObjectType } from "type-graphql";
 import { IsEmail, Length } from "class-validator";
-import { User } from "../entity/user";
+import { User } from "../entity";
 
 @ObjectType()
 export class LoginResponse {
