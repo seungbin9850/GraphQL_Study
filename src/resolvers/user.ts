@@ -16,7 +16,7 @@ import { Context } from "../dto/context";
 import { isAuth } from "../middleware/auth";
 
 @Resolver(User)
-export class UserResolver {
+export default class UserResolver {
   @Query(() => String, { name: "helloWorld", nullable: false })
   async hello() {
     return "hello world";
